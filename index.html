@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeConnect - Social Platform for Bikers</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-primary: #00f7ff;
+            --neon-secondary: #ff00e5;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #0a0a0a;
+            color: white;
+            min-height: 100vh;
+        }
+        .neon-gradient {
+            background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+        }
+        .neon-text {
+            text-shadow: 0 0 10px var(--neon-primary);
+        }
+        .neon-border {
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
+        .content-area {
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+        }
+        .nav-item.active {
+            color: var(--neon-primary);
+            position: relative;
+        }
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-primary);
+            box-shadow: 0 0 10px var(--neon-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content Area -->
+    <div class="content-area p-4" id="mainContent">
+        <!-- Home Feed Section -->
+        <div id="homeFeed" class="space-y-6">
+            <!-- Post Example -->
+            <div class="bg-gray-900 rounded-lg p-4 neon-border">
+                <div class="flex items-center mb-4">
+                    <img src="https://images.unsplash.com/photo-1519241047957-be31d7379a5d" class="w-10 h-10 rounded-full">
+                    <div class="ml-3">
+                        <h3 class="font-bold">John Rider</h3>
+                        <p class="text-sm text-gray-400">2 hours ago</p>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39" class="w-full h-64 object-cover rounded-lg mb-4">
+                <p class="mb-4">Amazing ride through the mountains today! 🏍️ #BikerLife</p>
+                <div class="flex justify-between items-center">
+                    <button class="flex items-center space-x-2"><i class="bi bi-heart"></i><span>256</span></button>
+                    <button class="flex items-center space-x-2"><i class="bi bi-chat"></i><span>45</span></button>
+                    <button class="flex items-center space-x-2"><i class="bi bi-share"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section (Initially Hidden) -->
+        <div id="rideMap" class="hidden">
+            <div class="bg-gray-900 rounded-lg p-4 mb-4">
+                <div id="map" class="h-[60vh] bg-gray-800 rounded-lg"></div>
+                <div class="mt-4 flex space-x-4">
+                    <button class="bg-blue-600 px-4 py-2 rounded-lg flex items-center">
+                        <i class="bi bi-fuel-pump mr-2"></i> Gas Stations
+                    </button>
+                    <button class="bg-green-600 px-4 py-2 rounded-lg flex items-center">
+                        <i class="bi bi-cup-hot mr-2"></i> Restaurants
+                    </button>
+                    <button class="bg-purple-600 px-4 py-2 rounded-lg flex items-center">
+                        <i class="bi bi-camera mr-2"></i> Viewpoints
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section (Initially Hidden) -->
+        <div id="profile" class="hidden">
+            <div class="text-center mb-6">
+                <img src="https://images.unsplash.com/photo-1519241047957-be31d7379a5d" class="w-24 h-24 rounded-full mx-auto mb-4">
+                <h2 class="text-2xl font-bold neon-text">Road Warrior</h2>
+                <p class="text-gray-400">Living life one ride at a time 🏍️</p>
+                <div class="mt-4">
+                    <span class="bg-gray-800 px-4 py-2 rounded-lg">15,783 km traveled</span>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-bold mb-4">Current Ride</h3>
+                <div class="bg-gray-900 rounded-lg p-4 neon-border">
+                    <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h4 class="font-bold">Harley-Davidson Street Glide</h4>
+                    <p class="text-gray-400">Owned since 2020</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold mb-4">Photo Gallery</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39" class="w-full h-40 object-cover rounded-lg">
+                    <img src="https://images.unsplash.com/photo-1558981359-219d6364c9c8" class="w-full h-40 object-cover rounded-lg">
+                    <img src="https://images.unsplash.com/photo-1558981852-426c6c22a69a" class="w-full h-40 object-cover rounded-lg">
+                    <img src="https://images.unsplash.com/photo-1558981403-c5f9c76487be" class="w-full h-40 object-cover rounded-lg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4">
+        <div class="flex justify-between items-center max-w-screen-xl mx-auto">
+            <button class="nav-item active" onclick="switchTab('homeFeed')">
+                <i class="bi bi-house-door text-2xl"></i>
+            </button>
+            <button class="nav-item" onclick="switchTab('rideMap')">
+                <i class="bi bi-map text-2xl"></i>
+            </button>
+            <button class="nav-item neon-gradient rounded-full p-3">
+                <i class="bi bi-plus-lg text-2xl"></i>
+            </button>
+            <button class="nav-item">
+                <i class="bi bi-bell text-2xl"></i>
+            </button>
+            <button class="nav-item" onclick="switchTab('profile')">
+                <i class="bi bi-person text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            const tabs = ['homeFeed', 'rideMap', 'profile'];
+            tabs.forEach(tab => {
+                document.getElementById(tab).classList.add('hidden');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+
+            // Update active state in navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        // Like Button Toggle
+        document.querySelectorAll('.bi-heart').forEach(heart => {
+            heart.addEventListener('click', function() {
+                this.classList.toggle('bi-heart-fill');
+                this.classList.toggle('text-red-500');
+            });
+        });
+
+        // Initialize with Home Feed
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('homeFeed');
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
